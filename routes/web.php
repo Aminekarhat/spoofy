@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthCustom;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\OffController;
+use App\Models\User;
+use App\Models\hr;
+use App\Models\application;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +21,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->with('mode', 1);
 });
 
-Auth::routes();
+// 0 auth 
+// 1 admin
+// 2 user
+
+//Auth::routes();
+
+Route::get('/rh/all', function() {
+    return hr::all();
+});
+Route::get('/application/all', function() {
+    $applications = application::all(); 
+    foreach ($applications as $key => $app) {
+        $app->user = User::find($app->user_id);
+        $app->rh = User::find($app->hr_id);
+    }
+    return $applications;
+});
+Route::post('/user/application', [ApplicationController::class, 'store']);
+Route::post('/user/off', [OffController::class, 'store']);
+
+Route::post('/login', [AuthCustom::class, 'customLogin'])->name('login.custom'); 
+Route::get('/login', function() {
+    return view('welcome')->with('mode', 0);
+});
+Route::post('/register', [AuthCustom::class, 'customRegister'])->name('register.custom'); 
+Route::get('/register', function() {
+    return view('welcome')->with('mode', 0);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
