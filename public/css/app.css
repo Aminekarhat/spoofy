@@ -10828,20 +10828,17 @@ textarea.form-control-lg {
 #wrapper {
   height: 100vh;
   width: 100vw;
-  background-color: #232323;
+  background-color: rgb(255, 255, 255);
   overflow-x: hidden;
 }
 
 #nav {
   height: 5vh;
-  color: white;
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ff0000;
-}
-#nav.p {
-  background-color: #4f008f !important;
+  background-color: #129FF8;
 }
 
 #container {
@@ -10850,8 +10847,12 @@ textarea.form-control-lg {
   width: 100%;
 }
 
+.stat {
+  background-color: #C3E5EA;
+}
+
 #sidebar {
-  background-color: #383737;
+  background-color: #C3E5EA;
   height: 100%;
   width: 20%;
   padding: 20px;
@@ -10860,7 +10861,7 @@ textarea.form-control-lg {
 
 #sidebar .sidebarBtn {
   padding: 8px;
-  background-color: gray;
+  background-color: white;
   margin: 8px auto;
   border-radius: 4px;
   cursor: pointer;
@@ -10874,7 +10875,6 @@ textarea.form-control-lg {
 #content {
   box-sizing: border-box;
   padding: 20px;
-  color: white;
   width: 100%;
 }
 

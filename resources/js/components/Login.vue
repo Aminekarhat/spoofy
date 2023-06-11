@@ -1,6 +1,14 @@
 <template>
     <div id="authWrapper">
         <div id="login">
+            <div class="loginBtns">
+                <div id="loginA" @click="login('A')" class="login">
+                    Login As RH
+                </div>
+                <div id="loginR" @click="login('E')" class="login">
+                    Login As Employee
+                </div>
+            </div>
             <div class="title">{{ form }}</div>
             <div class="subtitle">Lorem ipsum dolor sit.</div>
 
@@ -50,10 +58,16 @@
                 {{ form }}
             </div>
             <div v-if="form == 'login'" class="register">
-                <div>Don't have an account yet? <span @click="goTo('register')">Register</span></div>
+                <div>
+                    Don't have an account yet?
+                    <span @click="goTo('register')">Register</span>
+                </div>
             </div>
             <div v-if="form == 'register'" class="register">
-                <div>Already have an account? <span @click="goTo('login')">Login</span></div>
+                <div>
+                    Already have an account?
+                    <span @click="goTo('login')">Login</span>
+                </div>
             </div>
         </div>
     </div>
@@ -67,12 +81,12 @@ export default {
     },
     data() {
         return {
-            email: "kek@kek.com",
-            password: "kekkekkek",
-            confirmPassword: "kekkekkek",
-            name: "kekster",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            name: "",
             errors: {},
-            form: document.URL.replace(/^.*[\\\/]/, ''),
+            form: document.URL.replace(/^.*[\\\/]/, ""),
         };
     },
     computed: {},
@@ -87,8 +101,11 @@ export default {
                             "user",
                             JSON.stringify(res.data.user)
                         );
-                        localStorage.setItem('admin', res.data.admin ? true : false)
-                        window.location.href = '/home'
+                        localStorage.setItem(
+                            "admin",
+                            res.data.admin ? true : false
+                        );
+                        window.location.href = "/home";
                     } else {
                         this.errors = { x: ["Invalid Credentials."] };
                     }
@@ -112,7 +129,7 @@ export default {
                             "user",
                             JSON.stringify(res.data.user)
                         );
-                        window.location.href = '/home'
+                        window.location.href = "/home";
                     } else {
                         this.errors = { x: ["Error"] };
                     }
@@ -122,10 +139,63 @@ export default {
                 });
         },
         goTo(x) {
-          window.location.href = x
-        }
+            window.location.href = x;
+        },
+        login(x) {
+            switch (x) {
+                case "A":
+                    this.errors = {};
+                    axios
+                        .post("/login", {
+                            email: 'admin@admin.com',
+                            password: '12345678',
+                        })
+                        .then((res) => {
+                            if (res.data.gucci == true) {
+                                localStorage.setItem(
+                                    "user",
+                                    JSON.stringify(res.data.user)
+                                );
+                                localStorage.setItem(
+                                    "admin",
+                                    res.data.admin ? true : false
+                                );
+                                window.location.href = "/home";
+                            } else {
+                                this.errors = { x: ["Invalid Credentials."] };
+                            }
+                        })
+                        .catch((err) => {
+                            this.errors = err.response.data.errors;
+                        });
+                    break;
+
+                default:
+                    break;
+            }
+        },
     },
 };
 </script>
 
-<style></style>
+<style>
+.loginBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login {
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+#loginA {
+    border: purple 1px solid;
+    background: purple;
+}
+#loginR {
+    border: red 1px solid;
+    background: red;
+}
+</style>
