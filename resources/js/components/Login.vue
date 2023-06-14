@@ -147,8 +147,8 @@ export default {
                     this.errors = {};
                     axios
                         .post("/login", {
-                            email: 'admin@admin.com',
-                            password: '12345678',
+                            email: 'admin@admin.fr',
+                            password: 'adminadmin',
                         })
                         .then((res) => {
                             if (res.data.gucci == true) {

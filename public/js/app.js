@@ -5492,7 +5492,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.errors = {
           x: ["sent."]
         };
+        console.log(res.data);
       })["catch"](function (err) {
+        console.log(err);
         _this.errors = err.response.data.errors;
       });
     }
@@ -5858,8 +5860,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       case "A":
         this.errors = {};
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("/login", {
-          email: 'admin@admin.com',
-          password: '12345678'
+          email: 'admin@admin.fr',
+          password: 'adminadmin'
         }).then(function (res) {
           if (res.data.gucci == true) {
             localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -5960,8 +5962,15 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    submit: function submit(verdict) {
-      // axios.post('/application/judge', {'application_ud'})
+    submit: function submit(app, verdict) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/user/application/judge', {
+        app: app,
+        verdict: verdict
+      }).then(function (res) {
+        return console.log(res.data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   }
 });
@@ -11324,7 +11333,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.submitBtn {\n    width: -moz-fit-content;\n    width: fit-content;\n    margin: auto 8px;\n}\n.dcWrapper {\n    /* display: grid;\n    justify-content: center; */\n}\n.data {\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    width: 100%;\n}\n.data .div{\n    height: 100%;\n    margin-bottom: 12px;\n}\n.flexx{\n    justify-content: center;\n    align-items: center;\n    display: flex;\n}\n.dC {\n    width: 100%;\n}\n.fileUpload {\n    background: rgba(255, 255, 255, 0.151);\n    color: gray;\n    border-radius: 4px;\n    border: solid 0.6px gray;\n    height: 250px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 250px;\n}\n.fileUpload div {\n    max-width: 80%;\n}\n.form {\n    margin: unset !important;\n    width: 60% !important;\n}\n.form textarea {\n    width: 100%;\n    background: rgba(255, 255, 255, 0.151);\n    color: gray;\n    border-radius: 4px;\n    border: solid 0.6px gray;\n    padding-inline: 4px;\n    height: 250px;\n}\n.formT {\n    margin-bottom: 12px;\n}\n.hrSelect {\n    text-align: center;\n    margin-bottom: 35px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.submitBtn {\r\n    width: -moz-fit-content;\r\n    width: fit-content;\r\n    margin: auto 8px;\n}\n.dcWrapper {\r\n    /* display: grid;\r\n    justify-content: center; */\n}\n.data {\r\n    display: flex;\r\n    justify-content: space-around;\r\n    align-items: center;\r\n    width: 100%;\n}\n.data .div{\r\n    height: 100%;\r\n    margin-bottom: 12px;\n}\n.flexx{\r\n    justify-content: center;\r\n    align-items: center;\r\n    display: flex;\n}\n.dC {\r\n    width: 100%;\n}\n.fileUpload {\r\n    background: rgba(255, 255, 255, 0.151);\r\n    color: gray;\r\n    border-radius: 4px;\r\n    border: solid 0.6px gray;\r\n    height: 250px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 250px;\n}\n.fileUpload div {\r\n    max-width: 80%;\n}\n.form {\r\n    margin: unset !important;\r\n    width: 60% !important;\n}\n.form textarea {\r\n    width: 100%;\r\n    background: rgba(255, 255, 255, 0.151);\r\n    color: gray;\r\n    border-radius: 4px;\r\n    border: solid 0.6px gray;\r\n    padding-inline: 4px;\r\n    height: 250px;\n}\n.formT {\r\n    margin-bottom: 12px;\n}\n.hrSelect {\r\n    text-align: center;\r\n    margin-bottom: 35px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11372,7 +11381,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loginBtns {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.login {\n    padding: 1rem 2rem;\n    border-radius: 4px;\n    color: white;\n    cursor: pointer;\n}\n#loginA {\n    border: purple 1px solid;\n    background: purple;\n}\n#loginR {\n    border: red 1px solid;\n    background: red;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loginBtns {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\n}\n.login {\r\n    padding: 1rem 2rem;\r\n    border-radius: 4px;\r\n    color: white;\r\n    cursor: pointer;\n}\n#loginA {\r\n    border: purple 1px solid;\r\n    background: purple;\n}\n#loginR {\r\n    border: red 1px solid;\r\n    background: red;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11396,7 +11405,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.flex{\n  display: flex;\n}\nspan{\n  cursor: pointer;\n}\n.customCard{\n  border: 1px solid #129FF8;\n  border-radius: 4px;\n  width: 300px;\n  margin: 8px;\n  padding: 12px;\n}\n.btns{\n  display: flex;\n  justify-content: space-between;\n}\n.label{\n  opacity: .8;\n}\n.info{\n  font-size: 14px;\n}\n.btnY, .btnN{\n  padding: 0.8rem 1.2rem;\n  border-radius: 4px;\n  color: white;\n  text-transform: capitalize;\n}\n.btnY{\n  background: green;\n}\n.btnN{\n  background: red;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.flex{\r\n  display: flex;\n}\nspan{\r\n  cursor: pointer;\n}\n.customCard{\r\n  border: 1px solid #129FF8;\r\n  border-radius: 4px;\r\n  width: 300px;\r\n  margin: 8px;\r\n  padding: 12px;\n}\n.btns{\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.label{\r\n  opacity: .8;\n}\n.info{\r\n  font-size: 14px;\n}\n.btnY, .btnN{\r\n  padding: 0.8rem 1.2rem;\r\n  border-radius: 4px;\r\n  color: white;\r\n  text-transform: capitalize;\n}\n.btnY{\r\n  background: green;\n}\n.btnN{\r\n  background: red;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30948,7 +30957,7 @@ var render = function () {
               staticClass: "btnY",
               on: {
                 click: function ($event) {
-                  return _vm.submit("yes")
+                  return _vm.submit(app, "yes")
                 },
               },
             },
@@ -30961,7 +30970,7 @@ var render = function () {
               staticClass: "btnN",
               on: {
                 click: function ($event) {
-                  return _vm.submit("no")
+                  return _vm.submit(app, "no")
                 },
               },
             },

@@ -35,13 +35,18 @@ class OffController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user' => 'required',
-            'date' => 'required',
-        ]);
 
-        $off = off::create(['intern_id' => $request->user['id'], 'day' => $request->date]);
-
+        try {
+            $request->validate([
+                'user' => 'required',
+                'date' => 'required',
+            ]);
+    
+            $off = off::create(['intern_id' => $request->user['id'], 'day' => $request->date]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $off = $th;
+        }
         return $off;
     }
 

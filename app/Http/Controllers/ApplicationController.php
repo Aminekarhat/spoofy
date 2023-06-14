@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\application;
+use App\Models\User;
+use App\Models\Intern;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -22,9 +24,27 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function judge(Request $request)
     {
-        //
+        $res = false;
+        try {
+            $res = $request;
+
+            if($request->verdict == "yes") {
+                Intern::create(['user_id' => $request->app['user_id'], 'hr_id' => $request->app['hr_id']]);
+                application::find($request->app['id'])->delete();
+                $res = 'ok';
+
+            }else{
+                application::find($request->app['id'])->delete();
+                $res = 'ok2';
+            }   
+
+            
+        } catch (\Throwable $th) {
+            $res = $th;
+        }
+        return $res;
     }
 
     /**

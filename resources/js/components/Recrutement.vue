@@ -9,8 +9,8 @@
       <span class="label">message:</span> <br> <div class="info">{{app.message}}</div>
       <br><br>
       <div class="btns">
-        <span class="btnY" @click="submit('yes')">accept</span>
-      <span class="btnN" @click="submit('no')">decline</span>
+        <span class="btnY" @click="submit(app, 'yes')">accept</span>
+      <span class="btnN" @click="submit(app, 'no')">decline</span>
       </div>
     </div>
   </div>
@@ -31,8 +31,10 @@ export default {
     })
   },
   methods: {
-    submit(verdict) {
-      // axios.post('/application/judge', {'application_ud'})
+    submit(app, verdict) {
+      axios.post('/user/application/judge', {app, verdict})
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
     }
   }
 }

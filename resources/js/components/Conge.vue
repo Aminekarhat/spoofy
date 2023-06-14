@@ -92,8 +92,10 @@ export default {
                 .then((res) => {
                     this.date = "";
                     this.errors = { x: ["sent."] };
+                    console.log(res.data);
                 })
                 .catch((err) => {
+                    console.log(err);
                     this.errors = err.response.data.errors;
                 });
         },

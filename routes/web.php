@@ -42,6 +42,7 @@ Route::get('/application/all', function() {
     return $applications;
 });
 Route::post('/user/application', [ApplicationController::class, 'store']);
+Route::post('/user/application/judge', [ApplicationController::class, 'judge']);
 Route::post('/user/off', [OffController::class, 'store']);
 
 Route::post('/login', [AuthCustom::class, 'customLogin'])->name('login.custom'); 
