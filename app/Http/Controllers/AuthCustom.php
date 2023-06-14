@@ -8,6 +8,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use App\Models\hr;
+use App\Models\intern;
 use Illuminate\Support\Facades\Auth;
 
 class AuthCustom extends Controller
@@ -22,7 +23,8 @@ class AuthCustom extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $admin = hr::where('user_id', Auth::user()->id)->first();
-            return response()->json(['gucci' => true, 'user' => Auth::user(), 'admin' => $admin]);
+            $intern = intern::where('user_id', Auth::user()->id)->first();
+            return response()->json(['gucci' => true, 'user' => Auth::user(), 'admin' => $admin, 'intern' => $intern]);
         }
    
         return response()->json(['gucci' => false]);

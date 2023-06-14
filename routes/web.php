@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\off;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthCustom;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\OffController;
 use App\Models\User;
+use App\Models\intern;
 use App\Models\hr;
 use App\Models\application;
 
@@ -38,6 +40,21 @@ Route::get('/application/all', function() {
     foreach ($applications as $key => $app) {
         $app->user = User::find($app->user_id);
         $app->rh = User::find($app->hr_id);
+    }
+    return $applications;
+});
+Route::get('/employees/all', function() {
+    $applications = intern::all(); 
+    foreach ($applications as $key => $app) {
+        $app->user = User::find($app->user_id);
+        $app->rh = User::find($app->hr_id);
+    }
+    return $applications;
+});
+Route::get('/off/all', function() {
+    $applications = off::all(); 
+    foreach ($applications as $key => $app) {
+        $app->user = User::find(intern::find($app->intern_id)->user_id);
     }
     return $applications;
 });

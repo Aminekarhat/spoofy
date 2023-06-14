@@ -2,10 +2,10 @@
     <div id="authWrapper">
         <div id="login">
             <div class="loginBtns">
-                <div id="loginA" @click="login('A')" class="login">
+                <div id="loginA" @click="autoLogin('A')" class="login">
                     Login As RH
                 </div>
-                <div id="loginR" @click="login('E')" class="login">
+                <div id="loginR" @click="autoLogin('B')" class="login">
                     Login As Employee
                 </div>
             </div>
@@ -51,12 +51,17 @@
                     <div v-for="err in error" class="error">{{ err }}</div>
                 </div>
             </div>
+            <div v-if="form == 'login'" @click="login()" class="loginButton">
+                {{ form }}
+            </div>
             <div
-                @click="form == 'login' ? login() : register()"
+                v-if="form == 'register'"
+                @click="register()"
                 class="loginButton"
             >
                 {{ form }}
             </div>
+
             <div v-if="form == 'login'" class="register">
                 <div>
                     Don't have an account yet?
@@ -92,6 +97,7 @@ export default {
     computed: {},
     methods: {
         login() {
+            console.log("kek");
             this.errors = {};
             axios
                 .post("/login", { email: this.email, password: this.password })
@@ -104,6 +110,10 @@ export default {
                         localStorage.setItem(
                             "admin",
                             res.data.admin ? true : false
+                        );
+                        localStorage.setItem(
+                            "intern",
+                            res.data.intern ? true : false
                         );
                         window.location.href = "/home";
                     } else {
@@ -141,14 +151,14 @@ export default {
         goTo(x) {
             window.location.href = x;
         },
-        login(x) {
+        autoLogin(x) {
             switch (x) {
                 case "A":
                     this.errors = {};
                     axios
                         .post("/login", {
-                            email: 'admin@admin.fr',
-                            password: 'adminadmin',
+                            email: "admin@admin.fr",
+                            password: "adminadmin",
                         })
                         .then((res) => {
                             if (res.data.gucci == true) {
@@ -160,6 +170,10 @@ export default {
                                     "admin",
                                     res.data.admin ? true : false
                                 );
+                                localStorage.setItem(
+                                    "intern",
+                                    res.data.intern ? true : false
+                                );
                                 window.location.href = "/home";
                             } else {
                                 this.errors = { x: ["Invalid Credentials."] };
@@ -169,7 +183,36 @@ export default {
                             this.errors = err.response.data.errors;
                         });
                     break;
-
+                case 'B':
+                    this.errors = {};
+                    axios
+                        .post("/login", {
+                            email: "user@user.com",
+                            password: "useruser",
+                        })
+                        .then((res) => {
+                            if (res.data.gucci == true) {
+                                localStorage.setItem(
+                                    "user",
+                                    JSON.stringify(res.data.user)
+                                );
+                                localStorage.setItem(
+                                    "admin",
+                                    res.data.admin ? true : false
+                                );
+                                localStorage.setItem(
+                                    "intern",
+                                    res.data.intern ? true : false
+                                );
+                                window.location.href = "/home";
+                            } else {
+                                this.errors = { x: ["Invalid Credentials."] };
+                            }
+                        })
+                        .catch((err) => {
+                            this.errors = err.response.data.errors;
+                        });
+                break;
                 default:
                     break;
             }

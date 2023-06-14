@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\off;
+use App\Models\intern;
 use Illuminate\Http\Request;
 
 class OffController extends Controller
@@ -35,17 +36,23 @@ class OffController extends Controller
      */
     public function store(Request $request)
     {
+        $intern = intern::all()->where('user_id', $request->user['id'])->first();
 
-        try {
-            $request->validate([
-                'user' => 'required',
-                'date' => 'required',
-            ]);
+        if($intern) {
+            try {
+                $request->validate([
+                    'user' => 'required',
+                    'date' => 'required',
+                ]);
     
-            $off = off::create(['intern_id' => $request->user['id'], 'day' => $request->date]);
-        } catch (\Throwable $th) {
-            //throw $th;
-            $off = $th;
+        
+                $off = off::create(['intern_id' => $intern->id, 'day' => $request->date]);
+            } catch (\Throwable $th) {
+                //throw $th;
+                $off = $th;
+            }
+        }else{
+            $off = response(['errors' => ['x' => 'user is not an intern yet.']], 500);
         }
         return $off;
     }

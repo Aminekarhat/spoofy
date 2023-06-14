@@ -19,8 +19,8 @@
         <div class="rqsts">
             <div v-for="i in rqsts" class="rqst">
                 <div>
-                    <div class="rqstName">{{ i.username }}</div>
-                    <div class="rqstDate">{{ i.date }} days ago</div>
+                    <div class="rqstName">{{ i.user.name }}</div>
+                    <div class="rqstDate">{{ i.day }} </div>
                 </div>
                 <div class="rqstBtns">
                     <div class="btnAccept">
@@ -85,6 +85,12 @@ export default {
             ],
         };
     },
+    created() {
+        axios.get("/off/all").then((res) => {
+            this.rqsts = res.data;
+            console.log(res)
+        });
+    },
     methods: {
         submit() {
             axios
@@ -95,8 +101,9 @@ export default {
                     console.log(res.data);
                 })
                 .catch((err) => {
-                    console.log(err);
-                    this.errors = err.response.data.errors;
+                    console.log(err.response.data.errors);
+                    this.errors = [];
+                    this.errors.push(err.response.data.errors)
                 });
         },
     },
@@ -133,7 +140,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    border: 1px solid #129FF8;
+    border: 1px solid #129ff8;
     border-radius: 4px;
     margin: 12px 0;
 }
@@ -149,6 +156,6 @@ export default {
 }
 .dateSelect {
     text-align: center;
-    margin-bottom: 12px ;
+    margin-bottom: 12px;
 }
 </style>

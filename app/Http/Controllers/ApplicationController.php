@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\application;
 use App\Models\User;
-use App\Models\Intern;
+use App\Models\intern;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -31,7 +31,7 @@ class ApplicationController extends Controller
             $res = $request;
 
             if($request->verdict == "yes") {
-                Intern::create(['user_id' => $request->app['user_id'], 'hr_id' => $request->app['hr_id']]);
+                intern::create(['user_id' => $request->app['user_id'], 'hr_id' => $request->app['hr_id']]);
                 application::find($request->app['id'])->delete();
                 $res = 'ok';
 
